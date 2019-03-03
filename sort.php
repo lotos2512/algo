@@ -1,5 +1,31 @@
 <?php
 
+echo "Быстрая сортировка";
+
+$array  = [1099,21,32,5,31,32,6,34,76,98,21,87,1,2,3,4,5,7,8,0,5,9];
+
+function qSort(array $array) : array
+{
+    if (count($array) <=1) {
+        return $array;
+    }
+    $pivotIndex = array_rand($array);
+    $pivotVal = $array[$pivotIndex];
+    unset($array[$pivotIndex]);
+    $less = [];
+    $greater = [];
+    foreach ($array as $key => $value) {
+        if ($value < $pivotVal) {
+            $less[] = $value;
+        } elseif ($value >= $pivotVal) {
+            $greater[] = $value;
+        }
+    }
+    return  array_merge(qSort($less),[$pivotVal] ,qSort($greater));
+}
+var_dump(qSort($array));
+
+
 
 echo  "Сортировка пузырьком\n";
 
